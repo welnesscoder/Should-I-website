@@ -35,7 +35,7 @@ export default function QuickFireDeck({ entries, shareUrl }: QuickFireDeckProps)
   const { item, counts } = entries[index];
 
   return (
-    <div>
+    <div aria-live="polite">
       <p className="font-mono text-xs uppercase tracking-wide text-slate mb-2">
         {index + 1} of {entries.length}
       </p>

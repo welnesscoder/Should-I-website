@@ -40,9 +40,18 @@ interface SocialVoteCardProps {
   onNext?: () => void;
   /** Tighter padding/type scale for the feed; the standalone page uses the roomier default. */
   compact?: boolean;
+  /** Render the prompt as the page's <h1> — only the permalink page owns that, never a feed/list card. */
+  promptAsHeading?: boolean;
 }
 
-export default function SocialVoteCard({ item, initialCounts, shareUrl, onNext, compact }: SocialVoteCardProps) {
+export default function SocialVoteCard({
+  item,
+  initialCounts,
+  shareUrl,
+  onNext,
+  compact,
+  promptAsHeading,
+}: SocialVoteCardProps) {
   const [counts, setCounts] = useState<SocialVoteCounts>(initialCounts);
   const [voted, setVoted] = useState<string | null>(() => readStoredVote(item));
   const [pending, setPending] = useState(false);
@@ -116,9 +125,11 @@ export default function SocialVoteCard({ item, initialCounts, shareUrl, onNext, 
   const pad = compact ? "p-4" : "p-5";
   const promptSize = compact ? "text-base" : "text-lg sm:text-xl";
 
+  const PromptTag = promptAsHeading ? "h1" : "p";
+
   return (
     <div className={`rounded-lg border dashed-edge bg-white/40 ${pad}`}>
-      {item.prompt && <p className={`font-serif font-medium text-balance ${promptSize} mb-4`}>{item.prompt}</p>}
+      {item.prompt && <PromptTag className={`font-serif font-medium text-balance ${promptSize} mb-4`}>{item.prompt}</PromptTag>}
 
       {!voted ? (
         <div className="flex gap-2">

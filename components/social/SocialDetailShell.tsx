@@ -32,7 +32,7 @@ export default function SocialDetailShell({
         <ArrowLeft size={14} aria-hidden="true" /> {backLabel}
       </Link>
       <p className="font-mono text-xs uppercase tracking-wide text-slate mb-4">{eyebrow}</p>
-      <SocialVoteCard item={item} initialCounts={counts} shareUrl={`${siteUrl}${socialHref(item)}`} />
+      <SocialVoteCard item={item} initialCounts={counts} shareUrl={`${siteUrl}${socialHref(item)}`} promptAsHeading />
     </div>
   );
 }

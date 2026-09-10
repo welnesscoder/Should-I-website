@@ -16,7 +16,7 @@ export default async function FeedPreview({ siteUrl }: { siteUrl: string }) {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">The SayLess Feed</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">The SayLess Feed</h2>
       <div className="flex flex-col gap-4">
         {entries.map(({ entry, counts }) => (
           <FeedCard key={feedKey(entry)} entry={entry} counts={counts} siteUrl={siteUrl} />

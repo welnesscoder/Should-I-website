@@ -23,7 +23,7 @@ export default function MobileBottomNav() {
 
   return (
     <nav
-      aria-label="Primary"
+      aria-label="Primary mobile"
       className="sm:hidden fixed bottom-0 inset-x-0 z-40 border-t border-rule bg-paper/95 backdrop-blur"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
