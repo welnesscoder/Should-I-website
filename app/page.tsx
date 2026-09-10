@@ -35,6 +35,14 @@ export default function Home() {
         viewAllHref="/is-this-normal"
         siteUrl={SITE_URL}
       />
+      <SocialPreviewSection
+        type="hype"
+        eyebrow="✨ Worth the Hype?"
+        title="Is it actually worth it?"
+        viewAllHref="/worth-the-hype"
+        siteUrl={SITE_URL}
+        limit={1}
+      />
       <QuickFirePreview siteUrl={SITE_URL} />
       <QuestionOfTheDay />
       <ControversialSection />
