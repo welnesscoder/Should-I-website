@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "How to get in touch with Should I?",
+  description: "How to get in touch with SayLess.",
   alternates: { canonical: "/contact" },
 };
 
@@ -12,9 +12,9 @@ export default function ContactPage() {
       <h1 className="font-serif text-3xl sm:text-4xl font-semibold mb-6">Contact</h1>
       <div className="flex flex-col gap-4 text-slate">
         <p>
-          Found a broken calculator, a confusing question, or a decision you think should exist? Reach out at{" "}
-          <a href="mailto:hello@should-i.app" className="text-ink underline">
-            hello@should-i.app
+          Found a bug, a confusing question, or a decision/dilemma you think should exist? Reach out at{" "}
+          <a href="mailto:hello@sayless.app" className="text-ink underline">
+            hello@sayless.app
           </a>
           .
         </p>

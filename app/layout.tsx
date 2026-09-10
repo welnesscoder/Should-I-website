@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bitter, IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import "./globals.css";
 
 const bitter = Bitter({
@@ -22,18 +23,18 @@ const plexMono = IBM_Plex_Mono({
   weight: ["500"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://should-i.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sayless.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Should I? — a straight answer to your questionable decisions",
-    template: "%s — Should I?",
+    default: "SayLess — decisions, dilemmas & questionable choices",
+    template: "%s — SayLess",
   },
   description:
-    "Pick a decision, answer a few honest questions, and get a clear 0–100 verdict — plus what everyone else decided too.",
+    "The internet has opinions. So do we. Vote on dilemmas, get a straight verdict on your next decision, and see what everyone else thinks.",
   openGraph: {
-    siteName: "Should I?",
+    siteName: "SayLess",
     type: "website",
   },
   twitter: {
@@ -59,6 +60,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <MobileBottomNav />
       </body>
     </html>
   );

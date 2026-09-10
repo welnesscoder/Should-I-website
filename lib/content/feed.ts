@@ -67,3 +67,9 @@ export function buildFeed(): FeedItem[] {
 
   return feed;
 }
+
+export function feedKey(entry: FeedItem): string {
+  if (entry.kind === "should_i") return `d-${entry.decision.id}`;
+  if (entry.kind === "daily_question") return `q-${entry.question.id}`;
+  return `s-${entry.item.id}`;
+}

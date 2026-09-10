@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { CATEGORIES } from "@/content/categories";
 import { DECISIONS, categoryHref, decisionHref } from "@/content/decisions";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://should-i.app";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://sayless.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

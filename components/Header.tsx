@@ -1,6 +1,11 @@
 import Link from "next/link";
-import { CATEGORIES } from "@/content/categories";
-import { categoryHref } from "@/content/decisions";
+
+const NAV_LINKS = [
+  { href: "/feed", label: "Feed" },
+  { href: "/should-i", label: "Should I?" },
+  { href: "/trending", label: "Trending" },
+  { href: "/discover", label: "More" },
+];
 
 export default function Header() {
   return (
@@ -10,19 +15,16 @@ export default function Header() {
           href="/"
           className="font-serif text-2xl font-bold shrink-0 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
         >
-          Should I?
+          SayLess
         </Link>
-        <nav
-          aria-label="Categories"
-          className="flex gap-4 overflow-x-auto text-sm whitespace-nowrap min-w-0"
-        >
-          {CATEGORIES.map((c) => (
+        <nav aria-label="Primary" className="hidden sm:flex gap-5 text-sm whitespace-nowrap min-w-0 ml-auto">
+          {NAV_LINKS.map((l) => (
             <Link
-              key={c.id}
-              href={categoryHref(c.id)}
-              className="text-slate hover:text-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm px-1 shrink-0"
+              key={l.href}
+              href={l.href}
+              className="text-slate hover:text-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm px-1"
             >
-              {c.name}
+              {l.label}
             </Link>
           ))}
         </nav>

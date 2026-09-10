@@ -1,31 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
+import Link from "next/link";
+import { Search, ArrowRight } from "lucide-react";
 import { DECISIONS, decisionHref } from "@/content/decisions";
-
-const ROTATING_EXAMPLES = [
-  "buy it?",
-  "take the job?",
-  "text them?",
-  "move to a new city?",
-  "go tonight?",
-  "get the tattoo?",
-  "hit snooze?",
-];
 
 export default function Hero() {
   const router = useRouter();
-  const [index, setIndex] = useState(0);
   const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-    const t = setInterval(() => setIndex((i) => (i + 1) % ROTATING_EXAMPLES.length), 2400);
-    return () => clearInterval(t);
-  }, []);
 
   const matches = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -42,23 +25,33 @@ export default function Hero() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 pt-12 pb-10 text-center sm:text-left">
-      <h1 className="font-serif text-4xl sm:text-5xl font-semibold leading-tight">
-        Should I<br />
-        <span className="text-slate" aria-live="polite">
-          {ROTATING_EXAMPLES[index]}
-        </span>
-      </h1>
-      <p className="mt-4 text-slate max-w-md mx-auto sm:mx-0">
-        Pick a decision. Answer a few honest questions. Get a straight 0–100 verdict — and see what everyone else
-        decided too.
+      <h1 className="font-serif text-4xl sm:text-5xl font-semibold leading-tight">SayLess</h1>
+      <p className="mt-3 text-lg text-ink max-w-md mx-auto sm:mx-0">The internet has opinions. So do we.</p>
+      <p className="mt-2 text-slate max-w-md mx-auto sm:mx-0">
+        Decisions, dilemmas, hot takes &amp; questionable choices.
       </p>
+
+      <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-md mx-auto sm:mx-0">
+        <Link
+          href="/feed"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-ink text-paper font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+        >
+          Start scrolling <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+        <Link
+          href="/should-i"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full border-2 border-ink font-medium hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 transition-colors"
+        >
+          Help me decide
+        </Link>
+      </div>
 
       <div className="mt-6 relative max-w-md mx-auto sm:mx-0">
         <label htmlFor="decision-search" className="sr-only">
-          What are you trying to decide?
+          Or jump straight to a decision
         </label>
-        <div className="flex items-center gap-2 border-2 border-ink rounded-lg px-4 py-3 bg-white/60">
-          <Search size={18} className="text-slate shrink-0" aria-hidden="true" />
+        <div className="flex items-center gap-2 border border-rule rounded-lg px-4 py-2.5 bg-white/50">
+          <Search size={16} className="text-slate shrink-0" aria-hidden="true" />
           <input
             id="decision-search"
             type="text"
@@ -67,12 +60,12 @@ export default function Hero() {
             onKeyDown={(e) => {
               if (e.key === "Enter") goToDecision();
             }}
-            placeholder="What are you trying to decide?"
-            className="w-full bg-transparent outline-none text-base"
+            placeholder="Or search a decision — 'should I buy it?'"
+            className="w-full bg-transparent outline-none text-sm"
           />
         </div>
         {matches.length > 0 && (
-          <ul className="absolute z-10 left-0 right-0 mt-1 bg-paper border border-rule rounded-lg overflow-hidden shadow-sm">
+          <ul className="absolute z-10 left-0 right-0 mt-1 bg-paper border border-rule rounded-lg overflow-hidden shadow-sm text-left">
             {matches.map((d) => (
               <li key={d.id}>
                 <a
@@ -85,13 +78,6 @@ export default function Hero() {
             ))}
           </ul>
         )}
-        <button
-          onClick={goToDecision}
-          disabled={matches.length === 0}
-          className="mt-3 w-full sm:w-auto px-6 py-2.5 rounded-full bg-ink text-paper font-medium disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
-        >
-          Help me decide
-        </button>
       </div>
     </section>
   );

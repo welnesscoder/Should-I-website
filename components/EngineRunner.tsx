@@ -70,7 +70,7 @@ export default function EngineRunner({ decisionId }: { decisionId: string }) {
   const shareUrl =
     typeof window !== "undefined"
       ? window.location.href
-      : `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://should-i.app"}${decisionHref(activeDecision)}`;
+      : `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sayless.app"}${decisionHref(activeDecision)}`;
 
   return (
     <div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import FeedCard from "./FeedCard";
-import type { FeedItem } from "@/lib/content/feed";
+import { feedKey, type FeedItem } from "@/lib/content/feed";
 import type { SocialVoteCounts } from "@/lib/supabase/queries";
 
 export interface FeedEntry {
@@ -11,12 +11,6 @@ export interface FeedEntry {
 }
 
 const PAGE_SIZE = 8;
-
-function feedKey(entry: FeedItem): string {
-  if (entry.kind === "should_i") return `d-${entry.decision.id}`;
-  if (entry.kind === "daily_question") return `q-${entry.question.id}`;
-  return `s-${entry.item.id}`;
-}
 
 /**
  * Controlled pagination, not infinite scroll: the whole feed is small
