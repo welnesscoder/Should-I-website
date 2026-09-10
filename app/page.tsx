@@ -3,7 +3,7 @@ import CategoryGrid from "@/components/CategoryGrid";
 import TrendingSection from "@/components/TrendingSection";
 import QuestionOfTheDay from "@/components/QuestionOfTheDay";
 import ControversialSection from "@/components/ControversialSection";
-import QuickFireRow from "@/components/QuickFireRow";
+import ShouldIQuickRow from "@/components/ShouldIQuickRow";
 
 export default function Home() {
   return (
@@ -13,7 +13,7 @@ export default function Home() {
       <TrendingSection />
       <QuestionOfTheDay />
       <ControversialSection />
-      <QuickFireRow />
+      <ShouldIQuickRow />
     </div>
   );
 }

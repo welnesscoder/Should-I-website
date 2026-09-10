@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory } from "@/content/categories";
-import { ENGINE_LABEL, getCategoryDecisions } from "@/content/decisions";
+import { ENGINE_LABEL, decisionHref, getCategoryDecisions } from "@/content/decisions";
 import TicketRow from "@/components/TicketRow";
 
 export function generateStaticParams() {
@@ -20,7 +20,7 @@ export async function generateMetadata({
   return {
     title: category.name,
     description: category.description,
-    alternates: { canonical: `/${category.id}` },
+    alternates: { canonical: `/should-i/${category.id}` },
     openGraph: { title: `${category.name} — Should I?`, description: category.description },
   };
 }
@@ -43,7 +43,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         {decisions.map((d) => (
           <TicketRow
             key={d.id}
-            href={`/${d.category}/${d.slug}`}
+            href={decisionHref(d)}
             title={d.title}
             teaser={d.teaser}
             badge={ENGINE_LABEL[d.engine]}

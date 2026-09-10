@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getDecision } from "@/content/decisions";
+import { decisionHref, getDecision } from "@/content/decisions";
 import { getTrending } from "@/lib/supabase/queries";
 import TicketRow from "@/components/TicketRow";
 
@@ -37,7 +37,7 @@ export default async function TrendingPage() {
       </p>
       <div className="flex flex-col mt-6">
         {decisions.map((d) => (
-          <TicketRow key={d.id} href={`/${d.category}/${d.slug}`} title={d.title} teaser={d.teaser} />
+          <TicketRow key={d.id} href={decisionHref(d)} title={d.title} teaser={d.teaser} />
         ))}
       </div>
     </div>

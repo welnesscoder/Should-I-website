@@ -1,4 +1,4 @@
-import { getDecision } from "@/content/decisions";
+import { decisionHref, getDecision } from "@/content/decisions";
 import { getMostControversial } from "@/lib/supabase/queries";
 import TicketRow from "./TicketRow";
 
@@ -17,7 +17,7 @@ export default async function ControversialSection() {
           return (
             <TicketRow
               key={decision.id}
-              href={`/${decision.category}/${decision.slug}`}
+              href={decisionHref(decision)}
               title={decision.title}
               teaser={`${yesPct}% yes · ${100 - yesPct}% no`}
             />

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { DECISIONS } from "@/content/decisions";
+import { DECISIONS, decisionHref } from "@/content/decisions";
 
 const ROTATING_EXAMPLES = [
   "buy it?",
@@ -37,7 +37,7 @@ export default function Hero() {
   }, [query]);
 
   function goToDecision() {
-    if (matches[0]) router.push(`/${matches[0].category}/${matches[0].slug}`);
+    if (matches[0]) router.push(decisionHref(matches[0]));
   }
 
   return (
@@ -76,7 +76,7 @@ export default function Hero() {
             {matches.map((d) => (
               <li key={d.id}>
                 <a
-                  href={`/${d.category}/${d.slug}`}
+                  href={decisionHref(d)}
                   className="block px-4 py-2.5 text-sm hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-ink focus-visible:-outline-offset-2"
                 >
                   {d.title}

@@ -47,3 +47,13 @@ export function getRelated(decision: DecisionConfig, count = 3): DecisionConfig[
 export function getFlagshipDecisions(): DecisionConfig[] {
   return FLAGSHIP_IDS.map((id) => getDecision(id)).filter((d): d is DecisionConfig => Boolean(d));
 }
+
+/** Canonical URL for a decision — the single place that knows the /should-i prefix. */
+export function decisionHref(decision: Pick<DecisionConfig, "category" | "slug">): string {
+  return `/should-i/${decision.category}/${decision.slug}`;
+}
+
+/** Canonical URL for a category landing page. */
+export function categoryHref(categoryId: string): string {
+  return `/should-i/${categoryId}`;
+}

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CATEGORIES } from "@/content/categories";
+import { categoryHref } from "@/content/decisions";
 
 export default function Header() {
   return (
@@ -18,7 +19,7 @@ export default function Header() {
           {CATEGORIES.map((c) => (
             <Link
               key={c.id}
-              href={`/${c.id}`}
+              href={categoryHref(c.id)}
               className="text-slate hover:text-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm px-1 shrink-0"
             >
               {c.name}

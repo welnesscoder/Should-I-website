@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import type { DecisionConfig } from "@/lib/engines/types";
+import { decisionHref } from "@/content/decisions";
 import { trackEvent } from "@/lib/analytics/events";
 
 export default function RelatedDecisions({
@@ -20,7 +21,7 @@ export default function RelatedDecisions({
         {decisions.map((d) => (
           <Link
             key={d.id}
-            href={`/${d.category}/${d.slug}`}
+            href={decisionHref(d)}
             onClick={() => trackEvent("related_decision_clicked", { fromDecisionId, toDecisionId: d.id })}
             className="flex items-center justify-between gap-4 py-4 px-1 border-b border-rule hover:bg-white/40 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
           >
