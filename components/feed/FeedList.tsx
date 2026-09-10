@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import FeedCard from "./FeedCard";
+import FeedItemView from "./FeedItemView";
 import { feedKey, type FeedItem } from "@/lib/content/feed";
 import type { SocialVoteCounts } from "@/lib/supabase/queries";
+
+function feedItemViewProps(entry: FeedItem): { contentType: string; contentId: string } {
+  if (entry.kind === "should_i") return { contentType: "should_i", contentId: entry.decision.id };
+  if (entry.kind === "daily_question") return { contentType: "daily_question", contentId: entry.question.id };
+  return { contentType: entry.item.type, contentId: entry.item.id };
+}
 
 export interface FeedEntry {
   entry: FeedItem;
@@ -28,7 +35,9 @@ export default function FeedList({ entries, siteUrl }: { entries: FeedEntry[]; s
     <div>
       <div className="flex flex-col gap-5">
         {shown.map(({ entry, counts }) => (
-          <FeedCard key={feedKey(entry)} entry={entry} counts={counts} siteUrl={siteUrl} />
+          <FeedItemView key={feedKey(entry)} {...feedItemViewProps(entry)}>
+            <FeedCard entry={entry} counts={counts} siteUrl={siteUrl} />
+          </FeedItemView>
         ))}
       </div>
       {hasMore && (

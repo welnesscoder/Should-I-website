@@ -180,7 +180,10 @@ export default function SocialVoteCard({ item, initialCounts, shareUrl, onNext, 
             )}
             {onNext && (
               <button
-                onClick={onNext}
+                onClick={() => {
+                  trackEvent("next_item_viewed", { contentType: item.type, contentId: item.id });
+                  onNext();
+                }}
                 className="inline-flex items-center gap-1.5 ml-auto rounded-full bg-ink text-paper px-4 py-2 text-sm font-medium hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
               >
                 Next
