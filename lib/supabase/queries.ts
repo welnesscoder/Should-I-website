@@ -185,6 +185,82 @@ export async function castDailyQuestionVote(
   return { yes: Number(data[0].yes_count) || 0, no: Number(data[0].no_count) || 0 };
 }
 
+/** ---------- Generic social content votes (Cooked, Who's Wrong, Normal, Hype, Quick Fire) ---------- */
+
+export type SocialVoteCounts = Record<string, number>;
+
+export async function getSocialVoteCounts(
+  contentType: string,
+  contentId: string,
+): Promise<SocialVoteCounts> {
+  const client = getSupabaseServerClient();
+  if (!client) return {};
+
+  const { data, error } = await client
+    .from("content_votes")
+    .select("option_key")
+    .eq("content_type", contentType)
+    .eq("content_id", contentId);
+  if (error || !data) return {};
+
+  return data.reduce<SocialVoteCounts>((acc, row) => {
+    acc[row.option_key] = (acc[row.option_key] ?? 0) + 1;
+    return acc;
+  }, {});
+}
+
+export async function castSocialVote(
+  contentType: string,
+  contentId: string,
+  optionKey: string,
+  fingerprint: string,
+): Promise<SocialVoteCounts> {
+  const client = getSupabaseServerClient();
+  if (!client) return {};
+
+  const { data, error } = await client.rpc("cast_content_vote", {
+    p_content_type: contentType,
+    p_content_id: contentId,
+    p_option_key: optionKey,
+    p_fingerprint: fingerprint,
+  });
+  if (error || !data) return getSocialVoteCounts(contentType, contentId);
+
+  return (data as { option_key: string; vote_count: number | string }[]).reduce<SocialVoteCounts>((acc, row) => {
+    acc[row.option_key] = Number(row.vote_count) || 0;
+    return acc;
+  }, {});
+}
+
+/** Cross-type trending: recent vote activity across every content_votes row, last 48h. */
+export interface SocialTrendingEntry {
+  contentType: string;
+  contentId: string;
+  voteCount: number;
+}
+
+export async function getSocialTrending(limit = 12): Promise<SocialTrendingEntry[]> {
+  const client = getSupabaseServerClient();
+  if (!client) return [];
+
+  const since = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+  const { data, error } = await client
+    .from("content_votes")
+    .select("content_type, content_id")
+    .gte("created_at", since);
+  if (error || !data) return [];
+
+  const counts = new Map<string, SocialTrendingEntry>();
+  for (const row of data) {
+    const key = `${row.content_type}:${row.content_id}`;
+    const existing = counts.get(key);
+    if (existing) existing.voteCount += 1;
+    else counts.set(key, { contentType: row.content_type, contentId: row.content_id, voteCount: 1 });
+  }
+
+  return [...counts.values()].sort((a, b) => b.voteCount - a.voteCount).slice(0, limit);
+}
+
 /** Analytics only — never pass raw financial inputs here. */
 export async function recordDecisionRun(params: {
   decisionId: string;

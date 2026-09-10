@@ -109,3 +109,49 @@ alter table decision_runs enable row level security;
 
 create policy "votes are publicly readable" on votes for select using (true);
 create policy "daily question votes are publicly readable" on daily_question_votes for select using (true);
+
+-- SayLess social content (Am I Cooked?, Who's Wrong?, Is This Normal?,
+-- Worth the Hype?, Quick Fire). All five formats are structurally the same
+-- — a prompt with a binary vote — so they share ONE generic votes table and
+-- ONE RPC instead of a table+RPC per format. `content_type` + `content_id`
+-- match the `type` and `id` of the corresponding entry in /content/social,
+-- the same "code config is the source of truth, DB only holds votes"
+-- pattern the `votes` table above already uses for decisions. Adding a
+-- sixth social format later needs zero schema changes.
+create table if not exists content_votes (
+  id uuid primary key default gen_random_uuid(),
+  content_type text not null,
+  content_id text not null,
+  option_key text not null,
+  voter_fingerprint text not null, -- hashed anonymous identifier, never a raw IP
+  created_at timestamptz not null default now(),
+  unique (content_type, content_id, voter_fingerprint)
+);
+
+create index if not exists content_votes_lookup_idx on content_votes (content_type, content_id, created_at desc);
+
+create or replace function cast_content_vote(
+  p_content_type text,
+  p_content_id text,
+  p_option_key text,
+  p_fingerprint text
+)
+returns table (option_key text, vote_count bigint)
+language plpgsql
+security definer
+as $$
+begin
+  insert into content_votes (content_type, content_id, option_key, voter_fingerprint)
+  values (p_content_type, p_content_id, p_option_key, p_fingerprint)
+  on conflict (content_type, content_id, voter_fingerprint) do nothing;
+
+  return query
+    select cv.option_key, count(*)
+    from content_votes cv
+    where cv.content_type = p_content_type and cv.content_id = p_content_id
+    group by cv.option_key;
+end;
+$$;
+
+alter table content_votes enable row level security;
+create policy "content votes are publicly readable" on content_votes for select using (true);
