@@ -10,7 +10,7 @@ import {
   workHoursForPrice,
   type NeedVsWant,
 } from "@/lib/calculations/affordability";
-import { formatCurrency, formatCurrencyPrecise, formatHours, formatPercent } from "@/lib/format";
+import { formatCurrencyPrecise, formatHours, formatPercent } from "@/lib/format";
 
 function num(values: CalculatedValues, id: string): number {
   return Number(values[id] ?? 0);
