@@ -8,7 +8,7 @@ import type {
   WeightedAnswers,
   WeightedComputedInputs,
 } from "@/lib/engines/types";
-import { getDecision, getRelated } from "@/content/decisions";
+import { decisionHref, getDecision, getRelated } from "@/content/decisions";
 import { trackEvent } from "@/lib/analytics/events";
 import { getSessionId } from "@/lib/analytics/session";
 import QuickEngine from "./QuickEngine";
@@ -70,7 +70,7 @@ export default function EngineRunner({ decisionId }: { decisionId: string }) {
   const shareUrl =
     typeof window !== "undefined"
       ? window.location.href
-      : `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://should-i.app"}/${activeDecision.category}/${activeDecision.slug}`;
+      : `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://sayless.app"}${decisionHref(activeDecision)}`;
 
   return (
     <div>

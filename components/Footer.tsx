@@ -11,7 +11,7 @@ const LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-rule mt-14">
+    <footer className="border-t border-rule mt-14 pb-16 sm:pb-0">
       <div className="max-w-3xl mx-auto px-5 py-8 text-sm text-slate">
         <nav aria-label="Site" className="flex flex-wrap gap-x-4 gap-y-2 mb-4">
           {LINKS.map((l) => (
@@ -25,8 +25,8 @@ export default function Footer() {
           ))}
         </nav>
         <p>
-          Should I? gives quick, honest-feeling answers for everyday decisions. It&apos;s for
-          clarity and fun, not professional financial, legal, or medical advice.
+          SayLess is for clarity and fun — decisions, dilemmas, and community opinions. Should I?&apos;s calculated
+          verdicts are not professional financial, legal, or medical advice.
         </p>
       </div>
     </footer>

@@ -12,7 +12,23 @@ export type AnalyticsEventName =
   | "result_shared"
   | "related_decision_clicked"
   | "category_opened"
-  | "daily_question_vote";
+  | "daily_question_vote"
+  | "feed_item_viewed"
+  | "feed_vote"
+  | "next_item_viewed"
+  | "cooked_completed"
+  | "whos_wrong_vote"
+  | "normal_vote"
+  | "hype_vote"
+  | "quick_fire_vote"
+  | "share_card_generated"
+  | "related_content_clicked";
+
+interface SocialVotePayload {
+  contentType: string;
+  contentId: string;
+  optionKey: string;
+}
 
 export interface AnalyticsEventPayloads {
   decision_started: { decisionId: string; category: string; engine: string };
@@ -23,6 +39,16 @@ export interface AnalyticsEventPayloads {
   related_decision_clicked: { fromDecisionId: string; toDecisionId: string };
   category_opened: { category: string };
   daily_question_vote: { dailyQuestionId: string; choice: "yes" | "no" };
+  feed_item_viewed: { contentType: string; contentId: string };
+  feed_vote: SocialVotePayload;
+  next_item_viewed: { contentType: string; contentId: string };
+  cooked_completed: SocialVotePayload;
+  whos_wrong_vote: SocialVotePayload;
+  normal_vote: SocialVotePayload;
+  hype_vote: SocialVotePayload;
+  quick_fire_vote: SocialVotePayload;
+  share_card_generated: { contentType: string; contentId: string };
+  related_content_clicked: { fromContentId: string; toContentId: string };
 }
 
 export function trackEvent<E extends AnalyticsEventName>(event: E, payload: AnalyticsEventPayloads[E]): void {

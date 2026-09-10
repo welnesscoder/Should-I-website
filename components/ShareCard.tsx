@@ -24,7 +24,7 @@ export default function ShareCard({ decisionId, decisionTitle, result, url }: Sh
     trackEvent("result_shared", { decisionId, method: "unknown" });
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title: "Should I?", text: shareText, url });
+        await navigator.share({ title: "SayLess", text: shareText, url });
         return;
       } catch {
         // user cancelled or share failed; fall through to copy
@@ -52,6 +52,9 @@ export default function ShareCard({ decisionId, decisionTitle, result, url }: Sh
             {result.insights[0].value} · {result.insights[0].label}
           </p>
         )}
+        <p className="font-mono text-[10px] uppercase tracking-widest text-slate mt-4 pt-3 border-t border-rule">
+          SayLess
+        </p>
       </div>
       <button
         onClick={handleShare}

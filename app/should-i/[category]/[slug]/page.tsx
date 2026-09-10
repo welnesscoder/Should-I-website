@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { getCategory } from "@/content/categories";
-import { DECISIONS, ENGINE_LABEL, getDecisionBySlug } from "@/content/decisions";
+import { DECISIONS, ENGINE_LABEL, categoryHref, decisionHref, getDecisionBySlug } from "@/content/decisions";
 import EngineRunner from "@/components/EngineRunner";
 
 export function generateStaticParams() {
@@ -23,7 +23,7 @@ export async function generateMetadata({
     title: decision.title,
     description: decision.seo.description,
     keywords: decision.seo.keywords,
-    alternates: { canonical: `/${decision.category}/${decision.slug}` },
+    alternates: { canonical: decisionHref(decision) },
     openGraph: {
       title: decision.title,
       description: decision.seo.description,
@@ -62,7 +62,7 @@ export default async function DecisionPage({
       )}
 
       <Link
-        href={`/${decision.category}`}
+        href={categoryHref(decision.category)}
         className="inline-flex items-center gap-1 text-sm text-slate hover:text-ink mb-6 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
       >
         <ArrowLeft size={14} aria-hidden="true" /> {category?.name ?? "Back"}

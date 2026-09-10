@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CATEGORIES } from "@/content/categories";
-import { getCategoryDecisions } from "@/content/decisions";
+import { categoryHref, getCategoryDecisions } from "@/content/decisions";
 
 export default function CategoryGrid() {
   return (
@@ -12,7 +12,7 @@ export default function CategoryGrid() {
           return (
             <Link
               key={c.id}
-              href={`/${c.id}`}
+              href={categoryHref(c.id)}
               className="text-left border dashed-edge rounded-lg p-4 bg-white/40 hover:bg-white/70 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
             >
               <Icon size={20} className="mb-2" aria-hidden="true" />

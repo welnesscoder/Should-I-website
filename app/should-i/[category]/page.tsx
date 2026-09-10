@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CATEGORIES, getCategory } from "@/content/categories";
-import { ENGINE_LABEL, getCategoryDecisions } from "@/content/decisions";
+import { ENGINE_LABEL, decisionHref, getCategoryDecisions } from "@/content/decisions";
 import TicketRow from "@/components/TicketRow";
+import CategoryOpenedTracker from "@/components/CategoryOpenedTracker";
 
 export function generateStaticParams() {
   return CATEGORIES.map((c) => ({ category: c.id }));
@@ -20,7 +21,7 @@ export async function generateMetadata({
   return {
     title: category.name,
     description: category.description,
-    alternates: { canonical: `/${category.id}` },
+    alternates: { canonical: `/should-i/${category.id}` },
     openGraph: { title: `${category.name} — Should I?`, description: category.description },
   };
 }
@@ -35,6 +36,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <div className="max-w-2xl mx-auto px-5 py-10">
+      <CategoryOpenedTracker category={category.id} />
       <Icon size={28} className="mb-3" aria-hidden="true" />
       <h1 className="font-serif text-3xl sm:text-4xl font-semibold">{category.name}</h1>
       <p className="text-slate mt-2 max-w-md">{category.description}</p>
@@ -43,7 +45,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         {decisions.map((d) => (
           <TicketRow
             key={d.id}
-            href={`/${d.category}/${d.slug}`}
+            href={decisionHref(d)}
             title={d.title}
             teaser={d.teaser}
             badge={ENGINE_LABEL[d.engine]}
