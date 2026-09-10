@@ -151,7 +151,7 @@ export default function SocialVoteCard({
       ) : (
         <div className="stamp-pop">
           {total === 0 ? (
-            <p className="text-sm text-slate mb-3">No votes yet — you're the first.</p>
+            <p className="text-sm text-slate mb-3">No votes yet — you&apos;re the first.</p>
           ) : (
             <>
               <div
@@ -176,7 +176,7 @@ export default function SocialVoteCard({
           )}
           {item.resultLine && <p className="text-sm text-slate mt-2">{item.resultLine}</p>}
           {voteFailed && (
-            <p className="text-xs text-slate mt-2">Your vote is saved here — we'll sync it when the connection is back.</p>
+            <p className="text-xs text-slate mt-2">Your vote is saved here — we&apos;ll sync it when the connection is back.</p>
           )}
 
           <div className="flex items-center gap-3 mt-4">

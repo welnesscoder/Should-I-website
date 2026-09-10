@@ -7,8 +7,6 @@ import { trackEvent } from "@/lib/analytics/events";
 export default function CategoryOpenedTracker({ category }: { category: string }) {
   useEffect(() => {
     trackEvent("category_opened", { category });
-    // Only fires once per page visit.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category]);
 
   return null;
