@@ -1,16 +1,15 @@
 import { decisionHref, getDecision } from "@/content/decisions";
-import { getTrending } from "@/lib/supabase/queries";
+import { getUnifiedTrending } from "@/lib/content/trending";
+import TrendingRow from "./TrendingRow";
 import TicketRow from "./TicketRow";
 
 const FALLBACK_IDS = ["should-i-buy-it", "take-job-offer", "text-them-first", "buy-it-on-sale", "get-a-tattoo"];
 
 export default async function TrendingSection() {
-  const trending = await getTrending(6);
-  const trendingDecisions = trending.map((t) => getDecision(t.decisionId)).filter((d): d is NonNullable<typeof d> => Boolean(d));
-
-  const isReal = trendingDecisions.length > 0;
-  const decisions = isReal
-    ? trendingDecisions
+  const trending = await getUnifiedTrending(6);
+  const isReal = trending.length > 0;
+  const fallbackDecisions = isReal
+    ? []
     : FALLBACK_IDS.map((id) => getDecision(id)).filter((d): d is NonNullable<typeof d> => Boolean(d));
 
   return (
@@ -22,9 +21,11 @@ export default async function TrendingSection() {
         <p className="text-xs text-slate mb-3">Nothing&apos;s trending yet — here are a few good places to start.</p>
       )}
       <div className="flex flex-col mt-2">
-        {decisions.map((d) => (
-          <TicketRow key={d.id} href={decisionHref(d)} title={d.title} teaser={d.teaser} />
-        ))}
+        {isReal
+          ? trending.map((entry) => (
+              <TrendingRow key={entry.kind === "should_i" ? entry.decision.id : entry.item.id} entry={entry} />
+            ))
+          : fallbackDecisions.map((d) => <TicketRow key={d.id} href={decisionHref(d)} title={d.title} teaser={d.teaser} />)}
       </div>
     </section>
   );

@@ -101,6 +101,51 @@ export async function getMostControversial(limit = 3, minVotes = 20): Promise<Co
     .slice(0, limit);
 }
 
+export interface SocialControversialEntry {
+  contentType: string;
+  contentId: string;
+  leadPct: number;
+  totalVotes: number;
+}
+
+/**
+ * Social equivalent of getMostControversial. Every format is a binary vote
+ * with different option keys (cooked/fine, a/b, yes/not_me, ...), so rather
+ * than a per-format query this just looks at how close the two counts are
+ * for each (content_type, content_id) pair, regardless of what the options
+ * are called.
+ */
+export async function getMostControversialSocial(limit = 3, minVotes = 20): Promise<SocialControversialEntry[]> {
+  const client = getSupabaseServerClient();
+  if (!client) return [];
+
+  const { data, error } = await client.from("content_votes").select("content_type, content_id, option_key");
+  if (error || !data) return [];
+
+  const byItem = new Map<string, { contentType: string; contentId: string; counts: Record<string, number> }>();
+  for (const row of data) {
+    const key = `${row.content_type}:${row.content_id}`;
+    const entry = byItem.get(key) ?? {
+      contentType: row.content_type,
+      contentId: row.content_id,
+      counts: {} as Record<string, number>,
+    };
+    entry.counts[row.option_key] = (entry.counts[row.option_key] ?? 0) + 1;
+    byItem.set(key, entry);
+  }
+
+  return [...byItem.values()]
+    .map((entry) => {
+      const counts = Object.values(entry.counts);
+      const totalVotes = counts.reduce((a, b) => a + b, 0);
+      const leadPct = totalVotes ? Math.round((Math.max(...counts) / totalVotes) * 100) : 50;
+      return { contentType: entry.contentType, contentId: entry.contentId, leadPct, totalVotes };
+    })
+    .filter((entry) => entry.totalVotes >= minVotes)
+    .sort((a, b) => a.leadPct - b.leadPct)
+    .slice(0, limit);
+}
+
 export interface DailyQuestion {
   id: string;
   questionText: string;
