@@ -65,7 +65,7 @@ export default async function DecisionPage({
         href={`/${decision.category}`}
         className="inline-flex items-center gap-1 text-sm text-slate hover:text-ink mb-6 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
       >
-        <ArrowLeft size={14} /> {category?.name ?? "Back"}
+        <ArrowLeft size={14} aria-hidden="true" /> {category?.name ?? "Back"}
       </Link>
 
       <p className="font-mono text-xs uppercase tracking-wide text-slate mb-2">{ENGINE_LABEL[decision.engine]}</p>

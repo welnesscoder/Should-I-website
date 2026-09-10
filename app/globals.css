@@ -3,12 +3,15 @@
 :root {
   --color-paper: #edefea;
   --color-ink: #1b1d1f;
-  --color-slate: #6b7280;
+  /* Darkened from the original #6b7280 / #b9922f prototype tokens so body
+     text meets WCAG AA (4.5:1) against --color-paper; decorative uses
+     (bars, rings) keep the lighter -soft tints. */
+  --color-slate: #57606c;
   --color-yes: #2f6f4e;
   --color-yes-soft: #e4eee7;
   --color-no: #a13d2c;
   --color-no-soft: #f3e4e0;
-  --color-tie: #b9922f;
+  --color-tie: #7a5e14;
   --color-tie-soft: #f1e9d6;
   --color-rule: #c9ccc3;
 }

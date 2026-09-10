@@ -8,7 +8,7 @@ export default async function ControversialSection() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">People can&apos;t agree</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">People can&apos;t agree</h2>
       <div className="flex flex-col">
         {controversial.map((entry) => {
           const decision = getDecision(entry.decisionId);

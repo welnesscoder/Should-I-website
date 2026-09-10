@@ -50,7 +50,8 @@ export default function CommunityVote({ decisionId }: { decisionId: string }) {
     if (voted || pending || !counts) return;
     setPending(true);
     setVoted(choice);
-    setCounts((prev) => (prev ? { ...prev, [choice]: prev[choice] + 1 } : prev));
+    const optimistic = { ...counts, [choice]: counts[choice] + 1 };
+    setCounts(optimistic);
     try {
       window.localStorage.setItem(storageKey(decisionId), choice);
     } catch {
@@ -66,7 +67,13 @@ export default function CommunityVote({ decisionId }: { decisionId: string }) {
       });
       if (res.ok) {
         const data = await res.json();
-        if (typeof data.yes === "number" && typeof data.no === "number") {
+        // Guard against a stubbed/unconfigured backend echoing back zero counts and
+        // clobbering the optimistic update the user just saw.
+        if (
+          typeof data.yes === "number" &&
+          typeof data.no === "number" &&
+          data.yes + data.no >= optimistic.yes + optimistic.no
+        ) {
           setCounts({ yes: data.yes, no: data.no });
         }
       }
@@ -86,7 +93,7 @@ export default function CommunityVote({ decisionId }: { decisionId: string }) {
 
   return (
     <div className="border-t border-rule pt-6 mt-8">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">What everyone else said</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">What everyone else said</h2>
       {total === 0 ? (
         <p className="text-sm text-slate mb-3">No votes yet — be the first.</p>
       ) : total < 20 ? (

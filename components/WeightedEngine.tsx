@@ -160,7 +160,7 @@ export default function WeightedEngine({
           onClick={() => setStepIndex((i) => Math.max(0, i - 1))}
           className="mt-5 inline-flex items-center gap-1 text-sm text-slate hover:text-ink focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
         >
-          <ArrowLeft size={14} /> Back
+          <ArrowLeft size={14} aria-hidden="true" /> Back
         </button>
       )}
     </div>

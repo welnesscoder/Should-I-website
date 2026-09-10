@@ -37,7 +37,8 @@ export default function DailyQuestionVote({
     if (voted || pending) return;
     setPending(true);
     setVoted(choice);
-    setCounts((prev) => ({ ...prev, [choice]: prev[choice] + 1 }));
+    const optimistic = { ...counts, [choice]: counts[choice] + 1 };
+    setCounts(optimistic);
     try {
       window.localStorage.setItem(storageKey(dailyQuestionId), choice);
     } catch {
@@ -53,7 +54,15 @@ export default function DailyQuestionVote({
       });
       if (res.ok) {
         const data = await res.json();
-        if (typeof data.yes === "number" && typeof data.no === "number") setCounts({ yes: data.yes, no: data.no });
+        // Guard against a stubbed/unconfigured backend echoing back zero counts and
+        // clobbering the optimistic update the user just saw.
+        if (
+          typeof data.yes === "number" &&
+          typeof data.no === "number" &&
+          data.yes + data.no >= optimistic.yes + optimistic.no
+        ) {
+          setCounts({ yes: data.yes, no: data.no });
+        }
       }
     } catch {
       // optimistic count stands

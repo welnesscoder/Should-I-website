@@ -18,7 +18,7 @@ export default function ResultCard({ result }: { result: DecisionResult }) {
 
       {breakdown.length > 0 && (
         <div className="mt-8">
-          <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">The breakdown</p>
+          <h3 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">The breakdown</h3>
           <BreakdownList factors={breakdown} />
         </div>
       )}

@@ -6,7 +6,7 @@ export default function QuickFireRow() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Quick fire</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Quick fire</h2>
       <div className="flex gap-2 overflow-x-auto pb-2 -mx-5 px-5 snap-x snap-mandatory">
         {decisions.map((d) => (
           <Link

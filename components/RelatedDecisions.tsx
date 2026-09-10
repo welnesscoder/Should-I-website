@@ -15,7 +15,7 @@ export default function RelatedDecisions({
 
   return (
     <div className="border-t border-rule pt-6 mt-8">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Related decisions</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Related decisions</h2>
       <div className="flex flex-col">
         {decisions.map((d) => (
           <Link

@@ -41,7 +41,7 @@ export default function ShareCard({ decisionId, decisionTitle, result, url }: Sh
 
   return (
     <div className="mt-10 border-t border-rule pt-8">
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Share this result</p>
+      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">Share this result</h2>
       <div className="rounded-lg border dashed-edge p-5 bg-white/50 max-w-sm">
         <p className="font-mono text-xs uppercase tracking-wide text-slate mb-2">Should I?</p>
         <p className="font-serif text-lg font-semibold mb-3">{decisionTitle}</p>
@@ -57,12 +57,12 @@ export default function ShareCard({ decisionId, decisionTitle, result, url }: Sh
         onClick={handleShare}
         className="mt-4 inline-flex items-center gap-2 rounded-full border border-rule bg-white/50 px-5 py-2.5 text-sm font-medium hover:bg-white/80 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
       >
-        {copied ? <Check size={16} /> : <Share2 size={16} />}
+        {copied ? <Check size={16} aria-hidden="true" /> : <Share2 size={16} aria-hidden="true" />}
         {copied ? "Link copied" : "Share my result"}
       </button>
       {!copied && (
         <span className="ml-3 text-xs text-slate inline-flex items-center gap-1">
-          <LinkIcon size={12} /> or copies the link
+          <LinkIcon size={12} aria-hidden="true" /> or copies the link
         </span>
       )}
     </div>
