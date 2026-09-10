@@ -24,7 +24,7 @@ export default function QuickFireDeck({ entries, shareUrl }: QuickFireDeckProps)
         <p className="font-serif text-lg font-medium mb-2">That&apos;s all for now.</p>
         <button
           onClick={() => setIndex(0)}
-          className="mt-1 inline-flex rounded-full border-2 border-ink px-5 py-2 text-sm font-semibold hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+          className="mt-1 inline-flex rounded-full border-2 border-quickfire text-quickfire px-5 py-2 text-sm font-bold hover:bg-quickfire hover:text-white focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 transition-colors"
         >
           Go again
         </button>

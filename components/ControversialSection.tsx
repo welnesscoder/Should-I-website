@@ -7,7 +7,7 @@ export default async function ControversialSection() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">😭 People can&apos;t agree</h2>
+      <h2 className="font-mono text-xs uppercase tracking-wide font-bold text-brand mb-3">😭 People can&apos;t agree</h2>
       <div className="flex flex-col">
         {controversial.map((entry) => (
           <ControversialRow key={entry.kind === "should_i" ? entry.decision.id : entry.item.id} entry={entry} />

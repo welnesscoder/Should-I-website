@@ -13,8 +13,8 @@ export default async function QuestionOfTheDay() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <div className="rounded-lg border dashed-edge p-5 bg-white/40">
-        <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-2">Question of the day</h2>
+      <div className="rounded-lg border-2 border-brand p-5 bg-white/60">
+        <h2 className="font-mono text-xs uppercase tracking-wide font-bold text-brand mb-2">📊 Question of the day</h2>
         <p className="font-serif text-xl font-semibold mb-4 text-balance">{today.questionText}</p>
         <DailyQuestionVote dailyQuestionId={today.id} initialCounts={counts} />
         {previous && previousYesPct !== null && (

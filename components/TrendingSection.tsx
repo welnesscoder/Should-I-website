@@ -14,7 +14,7 @@ export default async function TrendingSection() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-1">
+      <h2 className={`font-mono text-xs uppercase tracking-wide font-bold mb-1 ${isReal ? "text-brand" : "text-slate"}`}>
         {isReal ? "🔥 Trending right now" : "Popular to start with"}
       </h2>
       {!isReal && (

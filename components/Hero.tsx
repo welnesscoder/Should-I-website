@@ -25,7 +25,7 @@ export default function Hero() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 pt-12 pb-10 text-center sm:text-left">
-      <h1 className="font-serif text-4xl sm:text-5xl font-semibold leading-tight">SayLess</h1>
+      <h1 className="font-serif text-4xl sm:text-5xl font-black leading-tight text-brand">SayLess</h1>
       <p className="mt-3 text-lg text-ink max-w-md mx-auto sm:mx-0">The internet has opinions. So do we.</p>
       <p className="mt-2 text-slate max-w-md mx-auto sm:mx-0">
         Decisions, dilemmas, hot takes &amp; questionable choices.
@@ -34,13 +34,13 @@ export default function Hero() {
       <div className="mt-6 flex flex-col sm:flex-row gap-3 max-w-md mx-auto sm:mx-0">
         <Link
           href="/feed"
-          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-ink text-paper font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full bg-brand text-white font-bold hover:opacity-90 focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2 transition-opacity"
         >
           Start scrolling <ArrowRight size={16} aria-hidden="true" />
         </Link>
         <Link
           href="/should-i"
-          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full border-2 border-ink font-medium hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 px-6 py-3 rounded-full border-2 border-brand text-brand font-bold hover:bg-brand hover:text-white focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2 transition-colors"
         >
           Help me decide
         </Link>

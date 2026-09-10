@@ -53,3 +53,56 @@ export const SOCIAL_TYPE_VOTE_VERB: Record<SocialContentType, string> = {
   hype: "Worth the hype?",
   quick_fire: "Pick one.",
 };
+
+/**
+ * One signature accent color per format (see app/globals.css). Tailwind
+ * needs full literal class names to find at build time, so this maps
+ * straight to class strings rather than a color key a component would
+ * interpolate — `text-${accent}` would silently not exist in the CSS.
+ */
+export interface SocialAccentClasses {
+  text: string;
+  bg: string;
+  bgSoft: string;
+  border: string;
+  /** Pre-composed so the full "hover:bg-x" string is visible to Tailwind's static scanner — see note above. */
+  hoverBg: string;
+}
+
+export const SOCIAL_TYPE_ACCENT: Record<SocialContentType, SocialAccentClasses> = {
+  cooked: {
+    text: "text-cooked",
+    bg: "bg-cooked",
+    bgSoft: "bg-cooked-soft",
+    border: "border-cooked",
+    hoverBg: "hover:bg-cooked",
+  },
+  whos_wrong: {
+    text: "text-wrong",
+    bg: "bg-wrong",
+    bgSoft: "bg-wrong-soft",
+    border: "border-wrong",
+    hoverBg: "hover:bg-wrong",
+  },
+  normal: {
+    text: "text-normal",
+    bg: "bg-normal",
+    bgSoft: "bg-normal-soft",
+    border: "border-normal",
+    hoverBg: "hover:bg-normal",
+  },
+  hype: {
+    text: "text-hype",
+    bg: "bg-hype",
+    bgSoft: "bg-hype-soft",
+    border: "border-hype",
+    hoverBg: "hover:bg-hype",
+  },
+  quick_fire: {
+    text: "text-quickfire",
+    bg: "bg-quickfire",
+    bgSoft: "bg-quickfire-soft",
+    border: "border-quickfire",
+    hoverBg: "hover:bg-quickfire",
+  },
+};

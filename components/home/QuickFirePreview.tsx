@@ -15,7 +15,7 @@ export default async function QuickFirePreview({ siteUrl }: { siteUrl: string })
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
       <div className="flex items-baseline justify-between mb-3">
-        <p className="font-mono text-xs uppercase tracking-wide text-slate">⚡ Quick Fire</p>
+        <p className="font-mono text-xs uppercase tracking-wide font-bold text-quickfire">⚡ Quick Fire</p>
         <Link
           href="/quick-fire"
           className="text-xs text-slate hover:text-ink inline-flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"

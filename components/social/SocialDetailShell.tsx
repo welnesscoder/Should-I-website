@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import SocialVoteCard from "./SocialVoteCard";
 import { socialHref } from "@/content/social";
-import type { SocialContentItem } from "@/lib/content/types";
+import { SOCIAL_TYPE_ACCENT, type SocialContentItem } from "@/lib/content/types";
 import type { SocialVoteCounts } from "@/lib/supabase/queries";
 
 interface SocialDetailShellProps {
@@ -23,6 +23,8 @@ export default function SocialDetailShell({
   counts,
   siteUrl,
 }: SocialDetailShellProps) {
+  const accent = SOCIAL_TYPE_ACCENT[item.type];
+
   return (
     <div className="max-w-2xl mx-auto px-5 py-10">
       <Link
@@ -31,7 +33,7 @@ export default function SocialDetailShell({
       >
         <ArrowLeft size={14} aria-hidden="true" /> {backLabel}
       </Link>
-      <p className="font-mono text-xs uppercase tracking-wide text-slate mb-4">{eyebrow}</p>
+      <p className={`font-mono text-xs uppercase tracking-wide font-semibold mb-4 ${accent.text}`}>{eyebrow}</p>
       <SocialVoteCard item={item} initialCounts={counts} shareUrl={`${siteUrl}${socialHref(item)}`} promptAsHeading />
     </div>
   );
