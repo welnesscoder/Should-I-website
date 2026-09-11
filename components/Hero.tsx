@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 import { DECISIONS, decisionHref } from "@/content/decisions";
+import FormatChips from "@/components/home/FormatChips";
 
 export default function Hero() {
   const router = useRouter();
@@ -25,9 +26,12 @@ export default function Hero() {
 
   return (
     <section className="max-w-2xl mx-auto px-5 pt-12 pb-10 text-center sm:text-left">
-      <h1 className="font-serif text-4xl sm:text-5xl font-black leading-tight text-brand">SayLess</h1>
-      <p className="mt-3 text-lg text-ink max-w-md mx-auto sm:mx-0">The internet has opinions. So do we.</p>
-      <p className="mt-2 text-slate max-w-md mx-auto sm:mx-0">
+      <h1 className="font-serif text-4xl sm:text-6xl font-black leading-[1.05]">
+        <span className="block text-ink">The internet</span>
+        <span className="block text-ink">has opinions.</span>
+        <span className="block text-brand">So do we.</span>
+      </h1>
+      <p className="mt-3 text-slate max-w-md mx-auto sm:mx-0">
         Decisions, dilemmas, hot takes &amp; questionable choices.
       </p>
 
@@ -79,6 +83,8 @@ export default function Hero() {
           </ul>
         )}
       </div>
+
+      <FormatChips />
     </section>
   );
 }
