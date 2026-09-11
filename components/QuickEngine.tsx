@@ -38,13 +38,13 @@ export default function QuickEngine({
       <div className="flex gap-3">
         <button
           onClick={() => answer("yes")}
-          className="flex-1 py-4 rounded-lg border border-rule bg-white/50 hover:bg-white/80 text-lg font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+          className="flex-1 py-4 rounded-lg border-2 border-rule bg-white/50 hover:border-brand hover:bg-brand-soft text-lg font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 transition-colors"
         >
           Yes
         </button>
         <button
           onClick={() => answer("no")}
-          className="flex-1 py-4 rounded-lg border border-rule bg-white/50 hover:bg-white/80 text-lg font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+          className="flex-1 py-4 rounded-lg border-2 border-rule bg-white/50 hover:border-brand hover:bg-brand-soft text-lg font-medium focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 transition-colors"
         >
           No
         </button>

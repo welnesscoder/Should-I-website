@@ -64,7 +64,7 @@ export default function CalculatedEngine({
                   aria-pressed={selected}
                   className={
                     "flex-1 py-3 rounded-lg border text-base focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 " +
-                    (selected ? "border-ink bg-ink text-paper" : "border-rule bg-white/50 hover:bg-white/80")
+                    (selected ? "border-brand bg-brand text-white" : "border-rule bg-white/50 hover:bg-white/80")
                   }
                 >
                   {opt ? "Yes" : "No"}
@@ -83,7 +83,7 @@ export default function CalculatedEngine({
                   aria-pressed={selected}
                   className={
                     "text-left px-4 py-3 rounded-lg border text-base focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 " +
-                    (selected ? "border-ink bg-ink text-paper" : "border-rule bg-white/50 hover:bg-white/80")
+                    (selected ? "border-brand bg-brand text-white" : "border-rule bg-white/50 hover:bg-white/80")
                   }
                 >
                   {opt.label}
@@ -116,7 +116,7 @@ export default function CalculatedEngine({
 
       <button
         onClick={handleContinue}
-        className="w-full py-3 rounded-md font-serif text-lg font-medium bg-ink text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+        className="w-full py-3 rounded-md font-serif text-lg font-bold bg-brand text-white hover:opacity-90 focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2"
       >
         {isLast ? "See the verdict" : "Continue"}
       </button>

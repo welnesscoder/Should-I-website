@@ -36,7 +36,7 @@ export default function MobileBottomNav() {
                 href={href}
                 aria-current={active ? "page" : undefined}
                 className={`flex flex-col items-center justify-center gap-0.5 py-2.5 text-[11px] focus-visible:outline-2 focus-visible:outline-ink focus-visible:-outline-offset-2 ${
-                  active ? "text-ink font-medium" : "text-slate"
+                  active ? "text-brand font-semibold" : "text-slate"
                 }`}
               >
                 <Icon size={20} aria-hidden="true" />

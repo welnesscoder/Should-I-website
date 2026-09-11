@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import SocialVoteCard from "@/components/social/SocialVoteCard";
 import { getSocialByType, socialHref } from "@/content/social";
 import { getSocialVoteCounts } from "@/lib/supabase/queries";
-import type { SocialContentType } from "@/lib/content/types";
+import { SOCIAL_TYPE_ACCENT, type SocialContentType } from "@/lib/content/types";
 
 interface SocialPreviewSectionProps {
   type: SocialContentType;
@@ -28,11 +28,12 @@ export default async function SocialPreviewSection({
   const entries = await Promise.all(
     items.map(async (item) => ({ item, counts: await getSocialVoteCounts(item.type, item.id) })),
   );
+  const accent = SOCIAL_TYPE_ACCENT[type];
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
       <div className="flex items-baseline justify-between mb-1">
-        <p className="font-mono text-xs uppercase tracking-wide text-slate">{eyebrow}</p>
+        <p className={`font-mono text-xs uppercase tracking-wide font-bold ${accent.text}`}>{eyebrow}</p>
         <Link
           href={viewAllHref}
           className="text-xs text-slate hover:text-ink inline-flex items-center gap-1 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"

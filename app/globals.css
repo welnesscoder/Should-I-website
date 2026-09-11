@@ -14,6 +14,25 @@
   --color-tie: #7a5e14;
   --color-tie-soft: #f1e9d6;
   --color-rule: #c9ccc3;
+
+  /* SayLess accent palette — one bold brand color plus one signature accent
+     per social format, so the feed reads as distinct sections rather than
+     one gray wash. Should I?'s yes/no/tie stay untouched: those encode a
+     hedged verdict, not brand flair, per the "stay visibly hedged" rule.
+     All chosen dark enough to clear 4.5:1 against --color-paper, same bar
+     as the rest of the palette. */
+  --color-brand: #6d28d9;
+  --color-brand-soft: #ece3fb;
+  --color-cooked: #c2410c;
+  --color-cooked-soft: #fde7db;
+  --color-wrong: #1d4ed8;
+  --color-wrong-soft: #dfe8fc;
+  --color-normal: #0f766e;
+  --color-normal-soft: #dcefed;
+  --color-hype: #b45309;
+  --color-hype-soft: #f6e6d2;
+  --color-quickfire: #be185d;
+  --color-quickfire-soft: #f8dfeb;
 }
 
 @theme inline {
@@ -27,6 +46,18 @@
   --color-tie: var(--color-tie);
   --color-tie-soft: var(--color-tie-soft);
   --color-rule: var(--color-rule);
+  --color-brand: var(--color-brand);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-cooked: var(--color-cooked);
+  --color-cooked-soft: var(--color-cooked-soft);
+  --color-wrong: var(--color-wrong);
+  --color-wrong-soft: var(--color-wrong-soft);
+  --color-normal: var(--color-normal);
+  --color-normal-soft: var(--color-normal-soft);
+  --color-hype: var(--color-hype);
+  --color-hype-soft: var(--color-hype-soft);
+  --color-quickfire: var(--color-quickfire);
+  --color-quickfire-soft: var(--color-quickfire-soft);
 
   --font-serif: var(--font-bitter), Georgia, serif;
   --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;

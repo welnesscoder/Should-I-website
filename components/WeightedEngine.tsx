@@ -112,7 +112,7 @@ export default function WeightedEngine({
                   aria-pressed={selected}
                   className={
                     "text-left px-4 py-3 rounded-lg border text-base focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 " +
-                    (selected ? "border-ink bg-ink text-paper" : "border-rule bg-white/50 hover:bg-white/80")
+                    (selected ? "border-brand bg-brand text-white" : "border-rule bg-white/50 hover:bg-white/80")
                   }
                 >
                   {label}
@@ -134,7 +134,7 @@ export default function WeightedEngine({
                       aria-pressed={selected}
                       className={
                         "flex-1 py-2 rounded-full border text-sm focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 " +
-                        (selected ? "border-ink bg-ink text-paper" : "border-rule bg-white/50 hover:bg-white/80")
+                        (selected ? "border-brand bg-brand text-white" : "border-rule bg-white/50 hover:bg-white/80")
                       }
                     >
                       {opt.label}
@@ -150,7 +150,7 @@ export default function WeightedEngine({
       <button
         onClick={handleContinue}
         disabled={!canContinue}
-        className="w-full py-3 rounded-md font-serif text-lg font-medium bg-ink text-paper disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+        className="w-full py-3 rounded-md font-serif text-lg font-bold bg-brand text-white hover:opacity-90 disabled:opacity-40 focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2"
       >
         {isLast ? "See the verdict" : "Continue"}
       </button>

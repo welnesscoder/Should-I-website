@@ -15,7 +15,7 @@ export default function ProgressSteps({ current, total }: { current: number; tot
         aria-label={`Step ${current} of ${total}`}
       >
         <div
-          className="h-full rounded-full bg-ink transition-[width] duration-300 motion-reduce:transition-none"
+          className="h-full rounded-full bg-brand transition-[width] duration-300 motion-reduce:transition-none"
           style={{ width: `${(current / total) * 100}%` }}
         />
       </div>

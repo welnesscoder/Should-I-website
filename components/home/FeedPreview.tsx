@@ -16,7 +16,7 @@ export default async function FeedPreview({ siteUrl }: { siteUrl: string }) {
 
   return (
     <section className="max-w-2xl mx-auto px-5 py-6">
-      <h2 className="font-mono text-xs uppercase tracking-wide text-slate mb-3">The SayLess Feed</h2>
+      <h2 className="font-mono text-xs uppercase tracking-wide font-bold text-brand mb-3">The SayLess Feed</h2>
       <div className="flex flex-col gap-4">
         {entries.map(({ entry, counts }) => (
           <FeedCard key={feedKey(entry)} entry={entry} counts={counts} siteUrl={siteUrl} />
@@ -24,7 +24,7 @@ export default async function FeedPreview({ siteUrl }: { siteUrl: string }) {
       </div>
       <Link
         href="/feed"
-        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-ink text-paper px-5 py-2.5 text-sm font-medium hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-brand text-white px-5 py-2.5 text-sm font-bold hover:opacity-90 focus-visible:outline-2 focus-visible:outline-brand focus-visible:outline-offset-2"
       >
         Keep scrolling <ArrowRight size={14} aria-hidden="true" />
       </Link>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Share2, Check, ArrowRight } from "lucide-react";
-import type { SocialContentItem, SocialContentType } from "@/lib/content/types";
+import { SOCIAL_TYPE_ACCENT, type SocialContentItem, type SocialContentType } from "@/lib/content/types";
 import type { SocialVoteCounts } from "@/lib/supabase/queries";
 import { trackEvent, type AnalyticsEventName } from "@/lib/analytics/events";
 
@@ -126,9 +126,10 @@ export default function SocialVoteCard({
   const promptSize = compact ? "text-base" : "text-lg sm:text-xl";
 
   const PromptTag = promptAsHeading ? "h1" : "p";
+  const accent = SOCIAL_TYPE_ACCENT[item.type];
 
   return (
-    <div className={`rounded-lg border dashed-edge bg-white/40 ${pad}`}>
+    <div className={`rounded-lg border-2 ${accent.border} bg-white/60 ${pad}`}>
       {item.prompt && <PromptTag className={`font-serif font-medium text-balance ${promptSize} mb-4`}>{item.prompt}</PromptTag>}
 
       {!voted ? (
@@ -136,14 +137,14 @@ export default function SocialVoteCard({
           <button
             onClick={() => castVote(item.optionA.key)}
             disabled={pending}
-            className="flex-1 py-2.5 rounded-full border-2 border-ink text-sm font-semibold hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 disabled:opacity-60 transition-colors"
+            className={`flex-1 py-2.5 rounded-full border-2 ${accent.border} ${accent.text} text-sm font-bold ${accent.hoverBg} hover:text-white focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 disabled:opacity-60 transition-colors`}
           >
             {item.optionA.label}
           </button>
           <button
             onClick={() => castVote(item.optionB.key)}
             disabled={pending}
-            className="flex-1 py-2.5 rounded-full border-2 border-ink text-sm font-semibold hover:bg-ink hover:text-paper focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 disabled:opacity-60 transition-colors"
+            className={`flex-1 py-2.5 rounded-full border-2 ${accent.border} ${accent.text} text-sm font-bold ${accent.hoverBg} hover:text-white focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 disabled:opacity-60 transition-colors`}
           >
             {item.optionB.label}
           </button>
@@ -159,8 +160,8 @@ export default function SocialVoteCard({
                 role="img"
                 aria-label={`${aPct}% ${item.optionA.label}, ${100 - aPct}% ${item.optionB.label}`}
               >
-                <div className="bg-ink" style={{ width: `${aPct}%` }} />
-                <div className="bg-rule" style={{ width: `${100 - aPct}%` }} />
+                <div className={accent.bg} style={{ width: `${aPct}%` }} />
+                <div className={`${accent.bg} opacity-30`} style={{ width: `${100 - aPct}%` }} />
               </div>
               <p className="text-sm text-slate mb-1">
                 <strong className="text-ink">
@@ -195,7 +196,7 @@ export default function SocialVoteCard({
                   trackEvent("next_item_viewed", { contentType: item.type, contentId: item.id });
                   onNext();
                 }}
-                className="inline-flex items-center gap-1.5 ml-auto rounded-full bg-ink text-paper px-4 py-2 text-sm font-medium hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2"
+                className={`inline-flex items-center gap-1.5 ml-auto rounded-full ${accent.bg} text-white px-4 py-2 text-sm font-medium hover:opacity-90 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2`}
               >
                 Next
                 <ArrowRight size={14} aria-hidden="true" />

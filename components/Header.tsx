@@ -13,7 +13,7 @@ export default function Header() {
       <div className="max-w-3xl mx-auto px-5 py-4 flex items-center gap-4">
         <Link
           href="/"
-          className="font-serif text-2xl font-bold shrink-0 focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
+          className="font-serif text-2xl font-bold shrink-0 text-brand focus-visible:outline-2 focus-visible:outline-ink focus-visible:outline-offset-2 rounded-sm"
         >
           SayLess
         </Link>

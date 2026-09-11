@@ -5,11 +5,14 @@ export default function TicketRow({
   title,
   teaser,
   badge,
+  badgeClass,
 }: {
   href: string;
   title: string;
   teaser: string;
   badge?: string;
+  /** Full literal Tailwind classes (e.g. "border-cooked text-cooked") to tint the badge per format. */
+  badgeClass?: string;
 }) {
   return (
     <Link
@@ -21,7 +24,11 @@ export default function TicketRow({
         <span className="block text-sm text-slate mt-0.5">{teaser}</span>
       </span>
       {badge && (
-        <span className="font-mono text-xs uppercase tracking-wide text-slate whitespace-nowrap border border-rule rounded-full px-3 py-1">
+        <span
+          className={`font-mono text-xs uppercase tracking-wide font-semibold whitespace-nowrap border rounded-full px-3 py-1 ${
+            badgeClass ?? "border-rule text-slate"
+          }`}
+        >
           {badge}
         </span>
       )}
